@@ -1,5 +1,7 @@
 package web.com.web.service;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +13,12 @@ public class UtilisateurService {
     
     @Autowired
     private UtilisateurDao daoUtilisateur;
-
+    
     public boolean verify(String username, String password){
         boolean result = false;
         for (Utilisateur utilisateur : this.daoUtilisateur.findAll()) {
-            if(utilisateur.getUsername().equals(username)){
-                if(utilisateur.getPassword().equals(password)){
-                    result = true;
-                }
+            if(utilisateur.getUsername().equals(username) && utilisateur.getPassword().equals(password)){
+                result = true;
             }
         }
 
