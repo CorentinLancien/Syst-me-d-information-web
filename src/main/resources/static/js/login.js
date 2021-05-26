@@ -7,7 +7,6 @@ var app = new Vue({
     data: {
       username: "",
       password: "",
-      isConnected: false,
       errors: [ 
           
       ]
@@ -25,12 +24,14 @@ var app = new Vue({
                         password: this.password
                     })
                 }).then(response => response.json())
-                .then(data => this.isConnected = data
-                )
-            console.log(this.isConnected);    
-           
-            e.preventDefault();
-       }
-    }
-
-  });
+                .then(function(data){
+                    if(data){
+                       alert("connecté!");
+                    }
+                    else{
+                      e.preventDefault();
+                    }
+                })   
+            }
+        }
+});
