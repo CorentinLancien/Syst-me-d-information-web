@@ -8,8 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import io.netty.handler.codec.http.HttpMethod;
-
 @Configuration
 @EnableWebSecurity
 public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -19,11 +17,9 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable()
             .authorizeRequests()
-            .antMatchers("/admin/**").hasRole("ADMIN")
-            .antMatchers("/anonymous*").anonymous()
-            .antMatchers("/login*").permitAll()
-            .antMatchers("/css/", "/js/","/fonts/","//favicon.ico", "/about").permitAll()
-            .anyRequest().permitAll()
+            .antMatchers("/login*").anonymous()
+            .antMatchers("/css/", "/js/","/fonts/").permitAll()
+            .antMatchers("/").authenticated()
             .and()
             .formLogin()
             .loginPage("/login")
@@ -33,7 +29,10 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .logout()
             .logoutUrl("/logout")
-            .deleteCookies("JSESSIONID");
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID")
+            .logoutSuccessUrl("/login");
+  
     }
 
     @Bean 

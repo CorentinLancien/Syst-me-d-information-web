@@ -32,7 +32,7 @@ var app = new Vue({
                 else{
                     this.errors.push("Nom d'utilisateur et/ou mot de passe inconnu");
                 }
-            })   
+            })
         }
     }
 });

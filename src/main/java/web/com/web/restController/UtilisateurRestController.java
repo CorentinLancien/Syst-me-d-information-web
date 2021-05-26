@@ -19,7 +19,6 @@ public class UtilisateurRestController {
     @PostMapping("")
     public boolean verifyConnexion(@RequestBody Utilisateur utilisateur){
 
-        
         return this.serviceUtilisateur.verify(utilisateur.getUsername(), utilisateur.getPassword());
     }
 }
