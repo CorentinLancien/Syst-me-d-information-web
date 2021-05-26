@@ -13,25 +13,26 @@ var app = new Vue({
 
     },
     methods:{
-        verifyConnexion(e){
+        verifyConnexion(){
+            this.errors = [];
 
-                fetch('/api/utilisateur/',
-                {
-                    method: 'POST',
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ 
-                        username: this.username,
-                        password: this.password
-                    })
-                }).then(response => response.json())
-                .then(function(data){
-                    if(data){
-                       alert("connecté!");
-                    }
-                    else{
-                      e.preventDefault();
-                    }
-                })   
-            }
+            fetch('/api/utilisateur/',
+            {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    username: this.username,
+                    password: this.password
+                })
+            }).then(response => response.json())
+            .then(data => {
+                if(data){
+                    window.location.replace("/");
+                }
+                else{
+                    this.errors.push("Nom d'utilisateur et/ou mot de passe inconnu");
+                }
+            })   
         }
+    }
 });

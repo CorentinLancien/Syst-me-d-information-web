@@ -9,23 +9,23 @@
 </head>
 <body>
     
-    <form class="box" name="login" id="login"  v-on:submit="verifyConnexion">
+    <div class="box" name="login" id="login" >
         <h1 class="box-title">Connexion</h1>
         <img th:src="@{/img/loginLogo.png}" alt="">
 
-        <div v-for="error in errors">
+        <div class="error" v-for="error in errors">
             <span>{{ error }}</span>
         </div>
         
         <input type="text" class="box-input" name="username" placeholder=" Nom d'utilisateur"  v-model="username" required="">
-        
+        kekedu53
         <input type="password" class="box-input" name="password" placeholder=" Mot de passe" v-model="password" required="">
         
-        <input type="submit" value="Connexion " name="submit" class="box-button" accesskey="13">        
+        <input type="submit" value="Connexion " name="submit" class="box-button" accesskey="13" v-on:click="verifyConnexion();">        
         <p class="box-register">Vous êtes nouveau ici? <a>S'inscrire</a></p>
         <p class="box-help">Besoin d'aide ? <a href="#">Contactez nous</a></p>
     
-        </form>
-        <script type="module" th:src="@{/js/login.js}"></script>
+    </div>
+    <script type="module" th:src="@{/js/login.js}"></script>
 </body>
 </html>
